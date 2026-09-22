@@ -1,0 +1,36 @@
+BY SUBMITTING THIS FILE TO CARMEN, I CERTIFY THAT I STRICTLY ADHERED TO THE
+TENURES OF THE OHIO STATE UNIVERSITY’S ACADEMIC INTEGRITY POLICY.
+THIS IS THE README FILE FOR PROJECT 6.
+
+Name: Vy Nguyen
+Time: 20 hours
+Concerns/Problems/Discoveries: My create_key function wouldn't output the correct
+key no matter how many times I would try to fix it and run through it with
+gdb. I had to remember that it matters what registers you use because the register
+I was using to store the key wasn't callee-saved. There were also nuances in the
+actual logic of my assembly code like having to make sure the key returned
+didn't have garbage values in it by clearing the upper bits of the register that 
+stored the key. Also, I had to make sure to use the 1 byte version of 
+instructions to only affect what was currently being read in. 
+
+gdb usage: I didn't use gdb to find a bug in the C language program.
+
+gdb usage for assembly: I used gdb to find the bug in my create_key function and
+the small error in my rotate_left function. I set breakpoints in main, create_key,
+and the rotate functions to see what was going wrong. I used the "tui reg general"
+command to look at all the values in the registers at each line in the assembly
+functions. I determined the bug in my create_key function because I realized
+that the %edx register was not saving the key after calling getchar because I 
+wasn't properly using callee-saved and caller-saved registers. I also used gdb
+to fix the bug in my rotate_left function by seeing that I had not properly
+set up my stack frame at the very beginning of the assembly code. I compared the 
+register values to the rotate_right function because I had set that one up
+properly and realized my error after checking back on slide decks in class as well.
+
+Jumping between C/x86-64 programs: Yes, I did jump between my C program and my x86-64
+program to fix some bugs. I had forgotten the logic on how to rotate the bits 
+so I referred back to my C code in project 2 to refresh my memory to write the
+assembly code for this project. The code did turn out slightly different because I 
+used two registers to store the rotated value instead of doing the exact logic in C
+where I shifted left/right first, had the helper value, and then combined the results
+together.
